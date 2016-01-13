@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CompTIA Structure</title>
+</head>
+<body>
+	<header> Black background </header>
+	
+	<article> <!-- Used because it represents the page content; is self-contained; makes sense on its own -->
+		<header> <!-- Using header to define the Topic of the article | this prevents a undefined section | the result is that all descendent sections of the article is referenced back to the main header/topic of article --> 
+			<p>Jake Archibald wrote ...</p> <!-- its not a heading, but a sub-heading that requires some structural tag-->
+			<h1>Don't use flexbox for overall layout</h1> <!-- A h1 tag used to represent its the beginning of a section -->
+			<p>Posted <time datetime="2014-02-05" > 05 February 2014</time> only after the previus post</p>
+		</header>
+		<p>When I was building this blog I tried to use flexbox for the overall page layout because I wanted to look cool and modern in front of my peers. However, like all of my other attempts to look cool and modern, it didn't really work.</p>
+		<p>Why? Well, take my hand and follow me into the next section…</p>
+		<p><strong>Update:</strong> Don't let this post scare you off flexbox, it's one of the best layout systems we have on the web today. However, there's a growing problem on the web when it comes to content shifting around during loading. For large amounts of content, flexbox can cause this, whereas grid is less likely to, but more commonly content-shift is caused by JS modifying the DOM.</p>
+		<section> <!-- different section, new thematic group identifying new important topic/chapter -->
+			<h1>Flexbox vs Grid</h1>
+			<p>Here's the basic three column design</p>
+			<figure>
+				<img src="img/three-column.PNG" alt="three-column-layout">
+				<figcaption>The Holy Grail, Apparently</figcaption>
+			</figure>
+			<p>Here it is mocked up using flexbox (works in all modern browsers), and here it is using grid layout (works in IE10+). Both look the same, the difference is in how they load:</p>
+			<figure>
+				<iframe src="//www.youtube.com/embed/vPryjyFP5FM?rel=0&html5=1" frameborder="0" ></iframe>
+				<figcaption>Flexbox vs Grid</figcaption>
+			</figure>
+			<p>Browsers can progressively render content as it's streamed from the server, this is great because it means users can start consuming content before it's all arrived. However, when combined with flexbox it causes misalignment and horizontal shifting.</p>
+			<p>It's difficult to spot too, you're unlikely to notice it while developing locally, or via a super-fast connection. In those cases the page loads too quickly to notice. Here's a demo that displays the columns on a delay, similar to how they will appear on a slower connection.</p>
+		</section>
+		<section> <!-- different section, new thematic group identifying new important topic/chapter -->
+			<h1>Flexbox: content dictates layout</h1>
+			<p>Here's a simplified version of the layout:</p>
+			<figure>
+				<img src="img/simplified-layout.PNG" alt="">
+			</figure>
+			<p>The container declares itself as a flexbox, and child elements declare how they'd like to interact with one another within the flexbox.</p>
+			<p>As the page loads, the container starts to receive the first child, the main content. At this point it's the only child and it has <code>flex: 1</code>, so it gets all of the space. When the nav starts to arrive, the main content has to resize to make room for it, which causes that ugly re-layout.</p>
+		</section>
+		<section> <!-- different section, new chapter of same article -->
+			<h1>Grid: container dictates layout (to some extent)</h1>
+			<p>Here's a simplified version of the same layout:</p>
+			<figure>
+				<img src="img/simplified-version-layout.PNG" alt="">
+			</figure>
+			<p><strong>Note: </strong>The code above is based on the latest spec and isn't implemented in any browser, yet. You should bother your favourite browser vendor about this.</p>
+			<p>Here the layout is defined in the container, so the nav is rendered into the middle column as soon as it starts to arrive.</p>
+		</section>
+		<section> <!-- Another section, yet seperating conerns of article, i.e. a different chapter -->
+			<h1>But grid can load poorly too ...</h1>
+			<p>To load nicely, you need to restrict yourself to configurations that can be predetermined by the grid container.</p>
+			<p>Here are some examples that break that:</p>
+			<figure>
+				<img src="img/load-poorly.PNG" alt="">
+			</figure>
+		</section>
+		<section> <!-- Yet another chapter of the article -->
+			<h1>But don't write-off flexbox!</h1>
+			<p>Flexbox is great, it just isn't the best thing for overall page layouts.</p>
+			<p>Flexbox's strength is in its content-driven model. It doesn't need to know the content up-front. You can <a href="#">distribute items based on their content, allow boxes to wrap</a> which is really handy for responsive design, you can even <a href="#">control the distribution of negative space</a> separately to positive space.</p>
+			<p><a href="#">This nav bar by Chris Coyier</a> is a great example of something that makes more sense as a flexbox than grid.</p>
+			<p>Flexbox and grid play well together, and are a huge step forward from the float & table hacks they replace. The sooner we can use them both in production, the better.</p>
+		</section>
+		<section>
+			<h1>Further reading</h1>
+			<ul>
+				<li><a href="#">Solving rendering performance problems</a></li>
+				<li><a href="#">Progressive enhancement is faster</a> - the benefits of progressive rendering</li>
+			</ul>
+		</section>
+		<section> <!-- consider comment as section of article because it does not make sense on its own -->
+			<h2>ghosttie <time datetime="2014-01" > 2 years ago</time></h2> <!-- Each username is considered the heading of the article -->
+			<article> <!-- however, each topic is an article because it can make sense on its own -->
+				<h2>jaffathecake <span>mod</span><a href="#"> ghosttie</a><time datetime="2014-01"> 2 years ago</time></h2>
+			</article>
+		</section>
+	</article>
+	
+	<aside>
+		<img src="img/author.PNG" alt="">
+		<p>Hello, I’m Jake and that is my face. I’m a developer advocate for Google Chrome.</p>
+		<h3>Elsewhere</h3>
+		<section>
+			<ul>
+				<li><a href="#">Twitter</a></li>
+				<li><a href="#">Lanyrd</a></li>
+				<li><a href="#">Github</a></li>
+				<li><a href="#">Google+</a></li>
+				<li><a href="#">Flickr</a></li>
+			</ul>
+		</section>
+		<h3>Contact</h3>
+		<section>
+			<p>Feel free to throw me an email, unless you're a recruiter, in which case destroy every email-capable device you own to prevent this possibility.</p>
+		</section>
+	</aside>
+	
+	<aside> <!-- Irrelevant to page - Showing images of structural result -->
+		<figure>
+			<img src="img/HTML%20structual%20result%20-%20nested%20heading%20within%20sections.PNG" alt="">
+			<figcaption>Result of placing h1 inside section tag of first article</figcaption>
+		</figure>
+		<figure>
+			<img src="img/HTML%20structual%20result%20-%20user%20header%20followed%20by%20section.PNG" alt="">
+			<figcaption>Result of placing h1 in header of article, and segmenting related content into sections </figcaption>
+		</figure>
+		<p>The latter provides a result that's more hierarchical to the main topic of the site - <em>Don't use flexbox for overall layout</em>. This further emphasizes it as the main topic/content. And as you can tell, all of the subsequent sections/chapters are nested under the main topic showing you the structure of the document.</p>
+	</aside>
+	
+	<footer>
+		<ul>
+			<li><a href="#">Subscribe</a></li>
+			<li><a href="#">Add Disqus to your site</a></li>
+			<li><a href="#">Privacy</a></li>
+		</ul>
+		<p>Disqus</p>
+	</footer>
+	
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
